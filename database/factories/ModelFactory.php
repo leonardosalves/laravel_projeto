@@ -22,3 +22,32 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(\App\Entities\Client::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'responsible' => $faker->name,
+        'email' => $faker->safeEmail,
+        'phone' => $faker->tollFreePhoneNumber,
+        'address' => $faker->address,
+        'obs' => $faker->realText($maxNbChars = 200, $indexSize = 2)
+    ];
+});
+$factory->define(\App\Entities\Project::class, function (Faker\Generator $faker) {
+    return [
+        'owner_id' => rand(1,10),
+        'client_id' => rand(1,10),
+        'name' => $faker->word,
+        'description' => $faker->sentence,
+        'progress' => rand(1,100),
+        'status' => rand(1,3),
+        'due_date' => $faker->dateTime('now'),
+    ];
+});
+$factory->define(\App\Entities\ProjectNotes::class, function (Faker\Generator $faker) {
+    return [
+        'project_id' => rand(1,10),
+        'title' => $faker->word,
+        'note' => $faker->paragraph
+    ];
+});
